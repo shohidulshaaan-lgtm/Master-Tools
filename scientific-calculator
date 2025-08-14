@@ -1,162 +1,171 @@
-  
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Scientific Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online scientific calculator – calculate, convert, and solve mathematical problems easily with AI Master Tools." />
+  <title>Scientific Calculator – AI Master Tools</title>
 
-        .calculator {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
-        }
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-        #display {
-            width: 100%;
-            height: 50px;
-            font-size: 1.5rem;
-            text-align: right;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-        }
+  <style>
+    :root {
+      --gradient: linear-gradient(135deg, #6a11cb, #2575fc);
+      --bg-dark: #0f0f1a;
+      --text-light: #f9f9f9;
+      --text-muted: #b3b3b3;
+      --btn-bg: rgba(255,255,255,0.08);
+    }
 
-        .button {
-            width: 60px;
-            height: 60px;
-            margin: 5px;
-            font-size: 1.5rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            transition: background-color 0.3s;
-        }
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
 
-        .button:hover {
-            background-color: #007bff;
-            color: white;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
 
-        .button:active {
-            background-color: #0056b3;
-        }
+    main {
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      max-width: 350px;
+      width: 100%;
+    }
 
-        .button.double {
-            width: 130px;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-        .button.clear {
-            background-color: #ff4d4d;
-            color: white;
-        }
+    #display {
+      width: 100%;
+      height: 60px;
+      font-size: 1.5rem;
+      text-align: right;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
 
-        .button.equals {
-            background-color: #28a745;
-            color: white;
-        }
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+    }
 
-        .button.function {
-            background-color: #17a2b8;
-            color: white;
-        }
-    </style>
+    button {
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: var(--btn-bg);
+      color: var(--text-light);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: var(--gradient);
+    }
+
+    button.equals {
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
+
+    button.clear {
+      background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    }
+
+    button.function {
+      background: linear-gradient(135deg, #17a2b8, #00c2cb);
+    }
+
+    @media (max-width: 400px) {
+      h1 { font-size: 1.2rem; }
+      #display { font-size: 1.2rem; height: 50px; }
+      button { font-size: 1rem; padding: 0.6rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="calculator">
-        <input type="text" id="display" disabled />
-        <div>
-            <button class="button" onclick="appendToDisplay('7')">7</button>
-            <button class="button" onclick="appendToDisplay('8')">8</button>
-            <button class="button" onclick="appendToDisplay('9')">9</button>
-            <button class="button function" onclick="appendToDisplay('/')">/</button>
-        </div>
-        <div>
-            <button class="button" onclick="appendToDisplay('4')">4</button>
-            <button class="button" onclick="appendToDisplay('5')">5</button>
-            <button class="button" onclick="appendToDisplay('6')">6</button>
-            <button class="button function" onclick="appendToDisplay('*')">*</button>
-        </div>
-        <div>
-            <button class="button" onclick="appendToDisplay('1')">1</button>
-            <button class="button" onclick="appendToDisplay('2')">2</button>
-            <button class="button" onclick="appendToDisplay('3')">3</button>
-            <button class="button function" onclick="appendToDisplay('-')">-</button>
-        </div>
-        <div>
-            <button class="button" onclick="appendToDisplay('0')">0</button>
-            <button class="button" onclick="appendToDisplay('.')">.</button>
-            <button class="button double" onclick="clearDisplay()">C</button>
-            <button class="button function" onclick="appendToDisplay('+')">+</button>
-        </div>
-        <div>
-            <button class="button function" onclick="appendToDisplay('sqrt(')">√</button>
-            <button class="button function" onclick="appendToDisplay('pow(')">x²</button>
-            <button class="button function" onclick="appendToDisplay('sin(')">sin</button>
-            <button class="button function" onclick="appendToDisplay('cos(')">cos</button>
-        </div>
-        <div>
-            <button class="button function" onclick="appendToDisplay('tan(')">tan</button>
-            <button class="button function" onclick="appendToDisplay('log(')">log</button>
-            <button class="button function" onclick="appendToDisplay('exp(')">exp</button>
-            <button class="button equals" onclick="calculate()">=</button>
-        </div>
+  <main>
+    <h1>Scientific Calculator</h1>
+    <input type="text" id="display" aria-label="Calculator display" disabled />
+
+    <div class="button-grid">
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button class="function" onclick="appendToDisplay('/')">÷</button>
+
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button class="function" onclick="appendToDisplay('*')">×</button>
+
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button class="function" onclick="appendToDisplay('-')">−</button>
+
+      <button onclick="appendToDisplay('0')">0</button>
+      <button onclick="appendToDisplay('.')">.</button>
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="function" onclick="appendToDisplay('+')">+</button>
+
+      <button class="function" onclick="appendToDisplay('Math.sqrt(')">√</button>
+      <button class="function" onclick="appendToDisplay('Math.pow(')">xʸ</button>
+      <button class="function" onclick="appendToDisplay('Math.sin(')">sin</button>
+      <button class="function" onclick="appendToDisplay('Math.cos(')">cos</button>
+
+      <button class="function" onclick="appendToDisplay('Math.tan(')">tan</button>
+      <button class="function" onclick="appendToDisplay('Math.log(')">log</button>
+      <button class="function" onclick="appendToDisplay('Math.exp(')">exp</button>
+      <button class="equals" onclick="calculate()">=</button>
     </div>
+  </main>
 
-    <script>
-        const display = document.getElementById('display');
+  <script>
+    const display = document.getElementById('display');
 
-        // Append values to the display
-        function appendToDisplay(value) {
-            display.value += value;
-        }
+    function appendToDisplay(value) {
+      display.value += value;
+    }
 
-        // Clear the display
-        function clearDisplay() {
-            display.value = '';
-        }
+    function clearDisplay() {
+      display.value = '';
+    }
 
-        // Evaluate the expression and show the result
-        function calculate() {
-            try {
-                // Replace square root and powers for easier eval() interpretation
-                let expression = display.value;
-                expression = expression.replace(/sqrt/g, 'Math.sqrt');
-                expression = expression.replace(/pow/g, 'Math.pow');
-                expression = expression.replace(/log/g, 'Math.log');
-                expression = expression.replace(/exp/g, 'Math.exp');
-                expression = expression.replace(/sin/g, 'Math.sin');
-                expression = expression.replace(/cos/g, 'Math.cos');
-                expression = expression.replace(/tan/g, 'Math.tan');
-
-                // Calculate the result
-                const result = eval(expression);
-                display.value = result;
-            } catch (e) {
-                display.value = 'Error';
-            }
-        }
-    </script>
+    function calculate() {
+      try {
+        const result = eval(display.value);
+        display.value = result;
+      } catch (e) {
+        display.value = 'Error';
+      }
+    }
+  </script>
 
 </body>
 </html>
-
-  
-  
